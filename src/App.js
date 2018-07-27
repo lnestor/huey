@@ -23,7 +23,6 @@ class App extends Component {
   };
 
   handleChange = (color, event) => {
-    console.log(color);
     this.setState({color: color});
     /*this.postApi(color.hex)
         .then(res => {})
@@ -51,18 +50,15 @@ class App extends Component {
   render() {
     return (
       <Grid container id={'background'} style={{backgroundColor: this.state.color.hex}}>
-        <Grid item md={3} />
-        <Grid item md={6} className={'outer-slider-box'}>
+        <Grid item md={3} xs={1}/>
+        <Grid item md={6} xs={10} className={'outer-slider-box'}>
           <div className={'box-title'}>
-            <Typography variant={'display4'}>
-              Huey.
-            </Typography>
+            <Typography variant={'display4'}>Huey.</Typography>
           </div>
           <div className={'inner-slider-box'}>
             <SliderPicker onChange={this.handleChange} color={this.state.color.hsl} />
           </div>
         </Grid>
-        <Grid item md={3} />
       </Grid>
     );
   }
