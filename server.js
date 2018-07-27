@@ -2,13 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5000;
-const exec = require('child_process').exec;
+const leds = require('rpi-ws281x-native');
 
-const scriptCmd = 'sudo PYTHONPATH=".:build/lib.linux-armv7l-2.7" python scripts/solid_color.py '
+const numLeds = 16;
+
+leds.init(numLeds);
 
 app.use(bodyParser.json())
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -16,7 +18,13 @@ app.use((req, res, next) => {
 });
 
 app.post('/', (req, res) => {
-  exec(scriptCmd + req.params.red + " " + req.params.blue + " " + req.params.green, (err, stdout, stderr) => {});
+  var colors = [];
+  for(var i = 0; i < numLeds; i++) {
+    colors[i] = parseInt('0x' + req.body.color.slice(1));
+  }
+  leds.render(colors);
+
+  res.send('');
 });
 
 app.listen(port, () => console.log('Listening on 5000'));

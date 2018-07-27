@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { SliderPicker } from 'react-color';
 
@@ -11,21 +10,17 @@ const styles = {
   }
 };
 
+const apiUrl = 'http://192.168.0.3:5000/';
+
 class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.apiUrl = 'http://localhost:5000/'
-  }
-
   handleChange = (color, event) => {
-    this.postApi(color.rgb)
+    this.postApi(color.hex)
         .then(res => {})
         .catch(err => console.log(err));
   };
 
   postApi = async (color) => {
-    const response = await fetch(this.apiUrl, {
+    const response = await fetch(apiUrl, {
       method: 'post',
       body: JSON.stringify({
         'color': color
@@ -47,9 +42,7 @@ class App extends Component {
         <Grid item xs>
         </Grid>
         <Grid item xs={6}>
-          <Paper>
-            <SliderPicker onChange={this.handleChange} />
-          </Paper>
+	  <SliderPicker onChange={this.handleChange} />
         </Grid>
         <Grid item xs>
         </Grid>
