@@ -15,8 +15,18 @@
   position: relative;
   top: 25%;
   height: 230px;
-  background: rgba(255, 255, 255, .8);
+  background: rgba(255, 255, 255, .75);
   border-radius: 20px;
+}
+
+.github-logo {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.github-logo, img {
+  opacity: 0.75;
 }
 
 html, body, #root, #background {

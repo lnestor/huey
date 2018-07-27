@@ -53,12 +53,17 @@ class App extends Component {
         <Grid item md={3} xs={1}/>
         <Grid item md={6} xs={10} className={'outer-slider-box'}>
           <div className={'box-title'}>
-            <Typography variant={'display4'}>Huey.</Typography>
+            <Typography variant={'display4'} style={{color: this.state.color.hex}}>Huey.</Typography>
           </div>
           <div className={'inner-slider-box'}>
             <SliderPicker onChange={this.handleChange} color={this.state.color.hsl} />
           </div>
         </Grid>
+        <div className={'github-logo'}>
+          <a href={githubUrl}>
+            <img src={githubLogo} width={64} height={64} alt={'Github Repository'} />
+          </a>
+        </div>
       </Grid>
     );
   }
