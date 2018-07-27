@@ -50,22 +50,20 @@ class App extends Component {
 
   render() {
     return (
-      <div id={'background'} style={{backgroundColor: this.state.color.hex}}>
-        <div className={'outer-slider-box'}>
+      <Grid container id={'background'} style={{backgroundColor: this.state.color.hex}}>
+        <Grid item md={3} />
+        <Grid item md={6} className={'outer-slider-box'}>
           <div className={'box-title'}>
-            <Grid container>
-              <Grid item xs md>
-                <Typography variant={'display4'}>
-                  Huey.
-                </Typography>
-              </Grid>
-            </Grid>
+            <Typography variant={'display4'}>
+              Huey.
+            </Typography>
           </div>
           <div className={'inner-slider-box'}>
             <SliderPicker onChange={this.handleChange} color={this.state.color.hsl} />
           </div>
-        </div>
-      </div>
+        </Grid>
+        <Grid item md={3} />
+      </Grid>
     );
   }
 }
