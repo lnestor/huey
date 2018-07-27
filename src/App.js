@@ -24,10 +24,9 @@ class App extends Component {
 
   handleChange = (color, event) => {
     this.setState({color: color});
-    /*this.postApi(color.hex)
+    this.postApi(color.hex)
         .then(res => {})
         .catch(err => console.log(err));
-        */
   };
 
   postApi = async (color) => {
