@@ -1,22 +1,34 @@
 import React, { Component } from 'react';
 import './App.css';
-import Grid from '@material-ui/core/Grid';
 import { SliderPicker } from 'react-color';
-
-const styles = {
-  container: {
-    textAlign: 'center',
-    paddingTop: 200
-  }
-};
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import 'typeface-roboto'
+import githubLogo from './github-logo.svg';
 
 const apiUrl = 'http://192.168.0.3:5000/';
+const githubUrl = 'https://github.com/lnestor/huey';
 
 class App extends Component {
+  state = {
+    color: {
+      hex: '#4093bf',
+      hsl: {
+        a: 1,
+        h: 201,
+        l: 0.5,
+        s: 0.5
+      }
+    }
+  };
+
   handleChange = (color, event) => {
-    this.postApi(color.hex)
+    console.log(color);
+    this.setState({color: color});
+    /*this.postApi(color.hex)
         .then(res => {})
         .catch(err => console.log(err));
+        */
   };
 
   postApi = async (color) => {
@@ -38,15 +50,22 @@ class App extends Component {
 
   render() {
     return (
-      <Grid container spacing={24} style={styles.container}>
-        <Grid item xs>
-        </Grid>
-        <Grid item xs={6}>
-	  <SliderPicker onChange={this.handleChange} />
-        </Grid>
-        <Grid item xs>
-        </Grid>
-      </Grid>
+      <div id={'background'} style={{backgroundColor: this.state.color.hex}}>
+        <div className={'outer-slider-box'}>
+          <div className={'box-title'}>
+            <Grid container>
+              <Grid item xs md>
+                <Typography variant={'display4'}>
+                  Huey.
+                </Typography>
+              </Grid>
+            </Grid>
+          </div>
+          <div className={'inner-slider-box'}>
+            <SliderPicker onChange={this.handleChange} color={this.state.color.hsl} />
+          </div>
+        </div>
+      </div>
     );
   }
 }

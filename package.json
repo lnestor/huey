@@ -9,7 +9,8 @@
     "react-color": "^2.14.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
-    "rpi-ws281x-native": "^0.8.2"
+    "rpi-ws281x-native": "^0.8.2",
+    "typeface-roboto": "0.0.54"
   },
   "scripts": {
     "start": "react-scripts start",
