@@ -1,0 +1,23 @@
+.menu-opener {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+
+.menu-1 {
+  position: fixed;
+  bottom: 80px;
+  left: 10px;
+}
+
+.menu-2 {
+  position: fixed;
+  bottom: 150px;
+  left: 10px;
+}
+
+.menu-3 {
+  position: fixed;
+  bottom: 220px;
+  left: 10px;
+}

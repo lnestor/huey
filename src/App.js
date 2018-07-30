@@ -4,10 +4,11 @@ import { SliderPicker } from 'react-color';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import 'typeface-roboto'
-import githubLogo from './github-logo.svg';
+
+import GithubLogo from './GithubLogo.js';
+import Menu from './Menu.js';
 
 const apiUrl = 'http://192.168.0.3:5000/';
-const githubUrl = 'https://github.com/lnestor/huey';
 
 class App extends Component {
   state = {
@@ -23,6 +24,7 @@ class App extends Component {
   };
 
   handleChange = (color, event) => {
+    console.log(color);
     this.setState({color: color});
     /*this.postApi(color.hex)
         .then(res => {})
@@ -59,11 +61,9 @@ class App extends Component {
             <SliderPicker onChange={this.handleChange} color={this.state.color.hsl} />
           </div>
         </Grid>
-        <div className={'github-logo'}>
-          <a href={githubUrl}>
-            <img src={githubLogo} width={64} height={64} alt={'Github Repository'} />
-          </a>
-        </div>
+
+        <GithubLogo />
+        <Menu />
       </Grid>
     );
   }
