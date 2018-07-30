@@ -21,4 +21,5 @@
 
 html, body, #root, #background {
   height: 100%;
+  position: fixed;
 }
