@@ -1,64 +1,22 @@
 import React, { Component } from 'react';
-import './App.css';
-import { SliderPicker } from 'react-color';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import 'typeface-roboto'
+import './App.css';
 
 import GithubLogo from './GithubLogo.js';
 import Menu from './Menu.js';
-
-const apiUrl = 'http://192.168.0.3:5000/';
+import Huey from './Huey.js';
 
 class App extends Component {
-  state = {
-    color: {
-      hex: '#4093bf',
-      hsl: {
-        a: 1,
-        h: 201,
-        l: 0.5,
-        s: 0.5
-      }
-    }
-  };
+  state = { backgroundColor: '' };
 
-  handleChange = (color, event) => {
-    console.log(color);
-    this.setState({color: color});
-    this.postApi(color.hex)
-        .then(res => {})
-        .catch(err => console.log(err));
-  };
-
-  postApi = async (color) => {
-    const response = await fetch(apiUrl, {
-      method: 'post',
-      body: JSON.stringify({
-        'color': color
-      }),
-      headers: {
-        'Content-type': 'application/json'
-      }
-    });
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-  };
+  handleColorChange = (color) => this.setState({backgroundColor: color});
 
   render() {
     return (
-      <Grid container id={'background'} style={{backgroundColor: this.state.color.hex}}>
+      <Grid container id={'background'} style={{backgroundColor: this.state.backgroundColor}}>
         <Grid item md={3} xs={1}/>
-        <Grid item md={6} xs={10} className={'outer-slider-box'}>
-          <div className={'box-title'}>
-            <Typography variant={'display4'} style={{color: this.state.color.hex}}>Huey.</Typography>
-          </div>
-          <div className={'inner-slider-box'}>
-            <SliderPicker onChange={this.handleChange} color={this.state.color.hsl} />
-          </div>
+        <Grid item md={6} xs={10}>
+          <Huey onColorChange={this.handleColorChange} />
         </Grid>
 
         <GithubLogo />
