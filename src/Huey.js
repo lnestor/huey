@@ -1,35 +1,23 @@
 import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import SolidColor from './SolidColor.js';
+import Wave from './Wave.js';
 import './Huey.css';
 import 'typeface-roboto';
 
 const apiUrl = 'http://192.168.0.3:5000/';
 
 class Huey extends Component {
-  state = {
-    color: {
-      hex: '#4093bf',
-      hsl: {
-        a: 1,
-        h: 201,
-        l: 0.5,
-        s: 0.5
-      }
-    }
-  };
 
-  componentDidMount() {
-    this.props.onColorChange(this.state.color.hex);
-  }
-
-  handleChange = (color, event) => {
-    console.log(color);
-    this.setState({color: color});
-    this.props.onColorChange(color.hex);
-    this.postApi(color.hex)
+  handleChange = (colorMode, params) => {
+    this.changeBackground(params.color);
+    this.postApi(params.color.hex)
         .then(res => {})
         .catch(err => console.log(err));
+  }
+
+  changeBackground = (color) => {
+    this.props.onColorChange(color);
   };
 
   postApi = async (color) => {
@@ -50,12 +38,21 @@ class Huey extends Component {
   };
 
   render() {
+    let colorPicker;
+    if (this.props.colorMode === 'solid') {
+      colorPicker = <SolidColor onChange={this.handleChange} color={this.props.color.hsl} />;
+    } else if (this.props.colorMode === 'wave') {
+      colorPicker = <Wave color={this.props.color} handleColorChange={this.changeBackground} />;
+    }
+
     return (
       <div className={'outer-slider-box'}>
         <div className={'title'}>
-          <Typography variant={'display4'} style={{color: this.state.color.hex}}>Huey.</Typography>
+          <Typography variant={'display4'} style={{color: this.props.color.hex}}>
+            Huey.
+          </Typography>
         </div>
-        <SolidColor onChange={this.handleChange} color={this.state.color.hsl} />
+        {colorPicker}
       </div>
     );
   }
