@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import SolidColor from './SolidColor.js';
 import Wave from './Wave.js';
+import Off from './Off.js';
 import './Huey.css';
 import 'typeface-roboto';
 
@@ -43,6 +44,8 @@ class Huey extends Component {
       colorPicker = <SolidColor onChange={this.handleChange} color={this.props.color.hsl} />;
     } else if (this.props.colorMode === 'wave') {
       colorPicker = <Wave color={this.props.color} handleColorChange={this.changeBackground} />;
+    } else if (this.props.colorMode === 'off') {
+      colorPicker = <Off onMount={this.handleChange} />;
     }
 
     return (

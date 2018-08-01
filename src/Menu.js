@@ -15,6 +15,10 @@ class Menu extends Component {
         <div className={'menu-1'} onClick={() => this.handleClick('wave')}>
           <img src={logo} width={64} height={64} alt={'Github Repository'} />
         </div>
+
+        <div className={'menu-2'} onClick={() => this.handleClick('off')}>
+          <img src={logo} width={64} height={64} alt={'Github Repository'} />
+        </div>
       </div>
     );
   }
