@@ -1,7 +1,6 @@
 const numLEDs = require('./Support.js').numLEDs;
 
 function setMode(leds, color) {
-  /*
   let colors = [];
 
   for(var i = 0; i < numLEDs; i++) {
@@ -9,7 +8,6 @@ function setMode(leds, color) {
   }
 
   leds.render(colors);
-  */
   console.log('solid');
 }
 

@@ -6,7 +6,7 @@ const off = require('./Off');
 
 class LEDStrip {
   constructor() {
-    // leds.init()
+    leds.init(16);
     this.latestColorMode = 'solid';
   }
 
