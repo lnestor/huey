@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import githubLogo from './github-logo.svg';
-import './GithubLogo.css';
+import githubLogo from '../icons/github-logo.svg';
+import '../styles/GithubLogo.css';
 
 const githubUrl = 'https://github.com/lnestor/huey';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import './App.css';
+import '../styles/App.css';
 
 import GithubLogo from './GithubLogo.js';
 import Menu from './Menu.js';
@@ -25,10 +25,7 @@ class App extends Component {
     colorMode: 'solid'
   };
 
-  handleColorChange = (color) => {
-    this.setState({backgroundColor: color});
-    console.log(this.state.backgroundColor.hex);
-  };
+  handleColorChange = (color) => this.setState({backgroundColor: color});
   setColorMode = (mode) => this.setState({colorMode: mode});
 
   render() {

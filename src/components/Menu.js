@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './github-logo.svg';
-import './Menu.css';
+import logo from '../icons/github-logo.svg';
+import '../styles/Menu.css';
 
 class Menu extends Component {
   handleClick = (mode) => this.props.handleModeSelect(mode);

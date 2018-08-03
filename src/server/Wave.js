@@ -1,9 +1,14 @@
-function setMode(leds, color) {
-  console.log('wave');
+class WaveMode {
+  setMode(leds, color) {
+    // TODO: make this interval call an actual function
+    this.interval = setInterval(() => {}, 100);
+    console.log('wave');
+  }
+
+  clear() {
+    clearInterval(this.interval);
+    console.log('cleared wave');
+  }
 }
 
-function clear() {
-  console.log('cleared wave');
-}
-
-module.exports = { setMode, clear };
+module.exports = new WaveMode();

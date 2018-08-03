@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import SolidColor from './SolidColor.js';
 import Wave from './Wave.js';
 import Off from './Off.js';
-import './Huey.css';
+import '../styles/Huey.css';
 import 'typeface-roboto';
 
 //const apiUrl = 'http://192.168.0.3:5000/';
@@ -46,7 +46,7 @@ class Huey extends Component {
     } else if (this.props.colorMode === 'wave') {
       return <Wave changeBackground={this.changeBackground} sendToServer={this.sendToServer} color={this.props.color} /> ;
     } else if (this.props.colorMode === 'off') {
-      return <Off changeBackground={this.changeBackground} /> ;
+      return <Off changeBackground={this.changeBackground} sendToServer={this.sendToServer} /> ;
     }
   };
 

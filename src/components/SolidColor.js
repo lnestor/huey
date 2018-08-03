@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SliderPicker } from 'react-color';
-import './SolidColor.css';
+import '../styles/SolidColor.css';
 
 const colorMode = 'solid';
 

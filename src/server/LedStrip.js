@@ -29,7 +29,7 @@ class LEDStrip {
         solidColor.setMode(leds, params.color);
         break;
       case 'wave':
-        wave.setMode(leds, params.color);
+        wave.setMode(leds, params.baseColor);
         break;
       case 'off':
         off.setMode(leds);
