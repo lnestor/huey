@@ -6,31 +6,33 @@ import Off from './Off.js';
 import './Huey.css';
 import 'typeface-roboto';
 
-const apiUrl = 'http://192.168.0.3:5000/';
+//const apiUrl = 'http://192.168.0.3:5000/';
+const apiUrl = 'http://localhost:5000/';
 
 class Huey extends Component {
-
-  handleChange = (colorMode, params) => {
-    this.changeBackground(params.color);
-    this.postApi(params.color.hex)
-        .then(res => {})
-        .catch(err => console.log(err));
-  }
 
   changeBackground = (color) => {
     this.props.onColorChange(color);
   };
 
-  postApi = async (color) => {
+  sendToServer = (colorMode, params) => {
+    this.postApi(colorMode, params)
+        .then(res => {})
+        .catch(err => console.log(err));
+  };
+
+  postApi = async (colorMode, params) => {
     const response = await fetch(apiUrl, {
       method: 'post',
       body: JSON.stringify({
-        'color': color
+        'colorMode': colorMode,
+        'params': params
       }),
       headers: {
         'Content-type': 'application/json'
       }
     });
+    // TODO: make this not call json() so we can send an empty string from the server
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);
@@ -38,15 +40,18 @@ class Huey extends Component {
     return body;
   };
 
-  render() {
-    let colorPicker;
+  colorPicker = () => {
     if (this.props.colorMode === 'solid') {
-      colorPicker = <SolidColor onChange={this.handleChange} color={this.props.color.hsl} />;
+      return <SolidColor changeBackground={this.changeBackground} sendToServer={this.sendToServer} color={this.props.color} /> ;
     } else if (this.props.colorMode === 'wave') {
-      colorPicker = <Wave color={this.props.color} handleColorChange={this.changeBackground} />;
+      return <Wave changeBackground={this.changeBackground} sendToServer={this.sendToServer} color={this.props.color} /> ;
     } else if (this.props.colorMode === 'off') {
-      colorPicker = <Off onMount={this.handleChange} />;
+      return <Off changeBackground={this.changeBackground} /> ;
     }
+  };
+
+  render() {
+    let colorPicker = this.colorPicker();
 
     return (
       <div className={'outer-slider-box'}>

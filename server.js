@@ -2,11 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5000;
-const leds = require('rpi-ws281x-native');
 
-const numLeds = 16;
-
-leds.init(numLeds);
+const ledStrip = require('./src/server/LedStrip');
 
 app.use(bodyParser.json())
 app.use((req, res, next) => {
@@ -18,13 +15,8 @@ app.use((req, res, next) => {
 });
 
 app.post('/', (req, res) => {
-  var colors = [];
-  for(var i = 0; i < numLeds; i++) {
-    colors[i] = parseInt('0x' + req.body.color.slice(1));
-  }
-  leds.render(colors);
-
-  res.send('');
+  ledStrip.setMode(req.body.colorMode, req.body.params);
+  res.send('{}');
 });
 
 app.listen(port, () => console.log('Listening on 5000'));

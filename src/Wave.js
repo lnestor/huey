@@ -3,7 +3,6 @@ import { SliderPicker } from 'react-color';
 import './SolidColor.css';
 
 const colorConvert = require('color-convert');
-
 const colorMode = 'wave';
 
 class Wave extends Component {
@@ -14,17 +13,24 @@ class Wave extends Component {
 
   componentDidMount() {
     this.interval = setInterval(() => this.updateColor(), 200);
+    this.props.sendToServer(colorMode, {
+      baseColor: this.state.baseColor
+    });
   }
 
   componentWillUnmount() {
-    this.props.handleColorChange(this.state.baseColor);
+    this.props.changeBackground(this.state.baseColor);
     clearInterval(this.interval);
   }
 
   handleChange = (color, event) => {
     this.setState({baseColor: color});
-  }
+    this.props.sendToServer(colorMode, {
+      baseColor: color
+    });
+  };
 
+  // TODO: factor into library
   updateColor = () => {
     let min = -8;
     let max = 8;
@@ -47,7 +53,7 @@ class Wave extends Component {
       }
     }
 
-    this.props.handleColorChange(color);
+    this.props.changeBackground(color);
   }
 
   render() {

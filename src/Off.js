@@ -7,21 +7,24 @@ const colorMode = 'off';
 class Off extends Component {
   componentDidMount() {
     let hex = '#505050';
-    this.props.onMount(colorMode, {
-      color: {
-        hex: hex,
-        hsl: {
-          a: 1,
-          h: colorConvert.hex.hsl(hex),
-          s: colorConvert.hex.hsl(hex),
-          l: colorConvert.hex.hsl(hex)
-        },
-        rgb: {
-          r: colorConvert.hex.rgb(hex)[0],
-          g: colorConvert.hex.rgb(hex)[1],
-          b: colorConvert.hex.rgb(hex)[2]
-        }
+    let color = {
+      hex: hex,
+      hsl: {
+        a: 1,
+        h: colorConvert.hex.hsl(hex.slice(1)),
+        s: colorConvert.hex.hsl(hex.slice(1)),
+        l: colorConvert.hex.hsl(hex.slice(1))
+      },
+      rgb: {
+        r: colorConvert.hex.rgb(hex.slice(1))[0],
+        g: colorConvert.hex.rgb(hex.slice(1))[1],
+        b: colorConvert.hex.rgb(hex.slice(1))[2]
       }
+    };
+
+    this.props.changeBackground(color);
+    this.props.sendToServer(colorMode, {
+      color: color
     });
   }
 
