@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5000;
 
-const ledStrip = require('./src/server/LedStrip');
+const ledStrip = require('./server/LedStrip');
 
 app.use(bodyParser.json())
 app.use((req, res, next) => {
