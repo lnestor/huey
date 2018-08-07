@@ -6,8 +6,9 @@ import Off from './Off.js';
 import '../styles/Huey.css';
 import 'typeface-roboto';
 
-const apiUrl = 'http://192.168.1.103:5000/';
+//const apiUrl = 'http://192.168.1.103:5000/';
 //const apiUrl = 'http://localhost:5000/';
+const apiUrl = 'http://raspberrypi.local:5000';
 
 class Huey extends Component {
 

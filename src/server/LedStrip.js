@@ -2,11 +2,12 @@ const leds = require('rpi-ws281x-native');
 const solidColor = require('./SolidColor');
 const wave = require('./Wave');
 const off = require('./Off');
+const numLEDs = require('./Support').numLEDs;
 
 
 class LEDStrip {
   constructor() {
-    leds.init(16);
+    leds.init(numLEDs);
     this.latestColorMode = 'solid';
   }
 

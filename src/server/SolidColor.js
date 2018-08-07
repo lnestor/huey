@@ -8,7 +8,6 @@ function setMode(leds, color) {
   }
 
   leds.render(colors);
-  console.log('solid');
 }
 
 module.exports = { setMode };

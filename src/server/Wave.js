@@ -7,64 +7,85 @@ class WaveMode {
   }
 
   setMode(leds, color) {
+    this.gettingBrighter = [];
+    for(var i = 0; i < numLEDs / 3; i++) {
+      if(Math.floor(Math.random() * 2) == 0) {
+        this.gettingBrighter[i] = true;
+      } else {
+        this.gettingBrighter[i] = false;
+      }
+    }
+
     this.baseColor = color;
-    this.currentColor = color.rgb;
-    this.interval = setInterval(() => this.updateColor(), 100);
-    console.log('wave');
+
+    this.rMin = this.baseColor.rgb.r * 0.25;
+    this.gMin = this.baseColor.rgb.g * 0.25;
+    this.bMin = this.baseColor.rgb.b * 0.25;
+
+    this.rMax = this.baseColor.rgb.r;
+    this.gMax = this.baseColor.rgb.g;
+    this.bMax = this.baseColor.rgb.b;
+
+    let rInterval = this.rMax - this.rMin;
+    let gInterval = this.gMax - this.rMin;
+    let bInterval = this.bMax - this.bMin;
+
+    this.currentColors = [];
+    for(var i = 0; i < numLEDs / 3; i++) {
+      let dimPercent = Math.random();
+      let currentR = this.rMin + dimPercent * rInterval;
+      let currentG = this.gMin + dimPercent * gInterval;
+      let currentB = this.bMin + dimPercent * bInterval;
+      this.currentColors[i] = { r: currentR, g: currentG, b: currentB }
+    }
+
+    this.leds = leds;
+
+    this.interval = setInterval(() => this.updateColor(), 20);
   }
 
   clear() {
     clearInterval(this.interval);
-    console.log('cleared wave');
   }
 
   updateColor() {
-    let rMin = this.baseColor.rgb.r * 0.85;
-    let gMin = this.baseColor.rgb.g * 0.85;
-    let bMin = this.baseColor.rgb.b * 0.85;
-    let rMax = (255 - this.baseColor.rgb.r) * 0.25 + this.baseColor.rgb.r;
-    let gMax = (255 - this.baseColor.rgb.g) * 0.25 + this.baseColor.rgb.g;
-    let bMax = (255 - this.baseColor.rgb.b) * 0.25 + this.baseColor.rgb.b;
-
-    let rInterval = rMax - rMin;
-    let gInterval = gMax - gMin;
-    let bInterval = bMax - bMin;
-
-    let r;
-    let g;
-    let b;
-    switch(this.currentDirection) {
-      case 'up':
-        r = this.currentColor.r + .01 * rInterval;
-        g = this.currentColor.g + .01 * gInterval;
-        b = this.currentColor.b + .01 * bInterval;
-
-        if (r > rMax || g > gMax || b > bMax) {
-          this.currentDirection = 'down';
-        }
-        break;
-      case 'down':
-        r = this.currentColor.r - .01 * rInterval;
-        g = this.currentColor.g - .01 * gInterval;
-        b = this.currentColor.b - .01 * bInterval;
-
-        if (r < rMin || g < gMin || b < bMin) {
-          this.currentDirection = 'up';
-        }
-        break;
-    }
-
-    this.currentColor = {r: r, g: g, b: b};
+    let rInterval = this.rMax - this.rMin;
+    let gInterval = this.gMax - this.gMin;
+    let bInterval = this.bMax - this.bMin;
 
     let colors = [];
 
-    let hex = colorConverter.rgb.hex(r, g, b);
-    console.log(hex);
-    for(var i = 0; i < numLEDs; i++) {
-      colors[i] = parseInt('0x' + hex);
+    for(var i = 0; i < numLEDs / 3; i++) {
+      let r;
+      let g;
+      let b;
+
+      if (this.gettingBrighter[i]) {
+        r = this.currentColors[i].r + .01 * rInterval;
+        g = this.currentColors[i].g + .01 * gInterval;
+        b = this.currentColors[i].b + .01 * bInterval;
+
+        if (r > this.rMax || g > this.gMax || b > this.bMax) {
+          this.gettingBrighter[i] = false;
+        }
+      } else {
+        r = this.currentColors[i].r - .01 * rInterval;
+        g = this.currentColors[i].g - .01 * gInterval;
+        b = this.currentColors[i].b - .01 * bInterval;
+
+        if (r < this.rMin || g < this.gMin || b < this.bMin) {
+          this.gettingBrighter[i] = true;
+        }
+      }
+
+      this.currentColors[i] = { r: r, g: g, b: b };
+      let hex = colorConverter.rgb.hex(r, g, b);
+      for(var j = 0; j < 3; j++) {
+        colors[3 * i + j] = parseInt('0x' + hex);
+      }
     }
 
-    leds.render(colors);
+    this.leds.render(colors);
   }
 }
 

@@ -1,1 +1,1 @@
-module.exports = { numLEDs: 16 };
+module.exports = { numLEDs: 48 };

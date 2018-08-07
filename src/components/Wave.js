@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { SliderPicker } from 'react-color';
+import { HuePicker } from 'react-color';
 import '../styles/SolidColor.css';
 
 const colorConverter = require('../support/ColorConverter.js');
