@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SliderPicker } from 'react-color';
+import { SliderPicker, HuePicker } from 'react-color';
 import '../styles/SolidColor.css';
 
 const colorConverter = require('../support/ColorConverter.js');
@@ -81,6 +81,7 @@ class Wave extends Component {
     return (
       <div className={'inner-slider-box'}>
         <SliderPicker onChange={this.handleChange} color={this.state.baseColor} />
+        <HuePicker onChange={this.handleChange} color={this.state.baseColor} height={12} style={{radius: '2px'}}/>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import githubLogo from '../icons/github-logo.svg';
+import githubLogo from '../icons/github.svg';
+import Icon from './Icon';
 import '../styles/GithubLogo.css';
 
 const githubUrl = 'https://github.com/lnestor/huey';
@@ -12,11 +13,9 @@ class GithubLogo extends Component {
 
   render() {
     return (
-      <div className={'github-logo'} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-        <a href={githubUrl}>
-          <img style={{opacity: this.state.opacity}} src={githubLogo} width={64} height={64} alt={'Github Repository'} />
-        </a>
-      </div>
+      <a href={githubUrl}>
+        <Icon className={'github-logo'} image={githubLogo} alt={'Github Repository'} />
+      </a>
     );
   }
 }

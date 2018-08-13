@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import logo from '../icons/github-logo.svg';
+import Icon from './Icon';
+import solid from '../icons/solid.svg';
+import wave from '../icons/up-arrow.svg';
+import power from '../icons/minus.svg';
 import '../styles/Menu.css';
 
 class Menu extends Component {
@@ -8,16 +11,16 @@ class Menu extends Component {
   render() {
     return (
       <div>
-        <div className={'menu-opener'} onClick={() => this.handleClick('solid')}>
-          <img src={logo} width={64} height={64} alt={'Github Repository'} />
+        <div onClick={() => this.handleClick('solid')}>
+          <Icon image={solid} className={'menu-opener'} />
         </div>
 
-        <div className={'menu-1'} onClick={() => this.handleClick('wave')}>
-          <img src={logo} width={64} height={64} alt={'Github Repository'} />
+        <div onClick={() => this.handleClick('wave')}>
+          <Icon image={wave} className={'menu-1'} />
         </div>
 
-        <div className={'menu-2'} onClick={() => this.handleClick('off')}>
-          <img src={logo} width={64} height={64} alt={'Github Repository'} />
+        <div onClick={() => this.handleClick('off')}>
+          <Icon image={power} className={'menu-2'} />
         </div>
       </div>
     );
