@@ -22,9 +22,9 @@ function fromHex(hex) {
     hex: hex,
     hsl: {
       a: 1,
-      h: colorConverter.hex.hsl(hex.slice(1)),
-      s: colorConverter.hex.hsl(hex.slice(1)),
-      l: colorConverter.hex.hsl(hex.slice(1))
+      h: colorConverter.hex.hsl(hex.slice(1))[0],
+      s: colorConverter.hex.hsl(hex.slice(1))[1],
+      l: colorConverter.hex.hsl(hex.slice(1))[2]
     },
     rgb: {
       r: colorConverter.hex.rgb(hex.slice(1))[0],
@@ -34,4 +34,21 @@ function fromHex(hex) {
   });
 }
 
-module.exports = { fromRGB, fromHex };
+function fromHSL(h, s, l) {
+  return({
+    hex: '#' + colorConverter.hsl.hex(h, s * 100, l * 100),
+    hsl: {
+      a: 1,
+      h: h,
+      s: s,
+      l: l
+    },
+    rgb: {
+      r: colorConverter.hsl.rgb([h, s * 100, l * 100])[0],
+      g: colorConverter.hsl.rgb([h, s * 100, l * 100])[1],
+      b: colorConverter.hsl.rgb([h, s * 100, l * 100])[2]
+    }
+  });
+}
+
+module.exports = { fromRGB, fromHex, fromHSL };

@@ -42,11 +42,11 @@ class Huey extends Component {
 
   colorPicker = () => {
     if (this.props.colorMode === 'solid') {
-      return <SolidColor changeBackground={this.changeBackground} sendToServer={this.sendToServer} color={this.props.color} /> ;
+      return <SolidColor changeBackground={this.changeBackground} sendToServer={this.sendToServer} color={this.props.color} />;
     } else if (this.props.colorMode === 'wave') {
-      return <Wave changeBackground={this.changeBackground} sendToServer={this.sendToServer} color={this.props.color} /> ;
+      return <Wave changeBackground={this.changeBackground} sendToServer={this.sendToServer} color={this.props.color} />;
     } else if (this.props.colorMode === 'off') {
-      return <Off changeBackground={this.changeBackground} sendToServer={this.sendToServer} /> ;
+      return <Off changeBackground={this.changeBackground} sendToServer={this.sendToServer} color={this.props.color} />;
     }
   };
 
